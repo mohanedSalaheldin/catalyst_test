@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({super.key});
@@ -14,6 +13,7 @@ class UsersScreen extends StatelessWidget {
         child: Column(
           children: [
             Card(
+              elevation: 5,
               child: SizedBox(
                 width: 400.0,
                 height: 200.0,

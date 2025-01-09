@@ -1,4 +1,4 @@
-import 'package:catalyst_test/features/users/domain/entities/user_entity.dart';
+import 'package:catalyst_test/src/features/users/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   final String createdAt;
