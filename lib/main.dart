@@ -1,16 +1,26 @@
+import 'package:catalyst_test/injection.dart';
+import 'package:catalyst_test/src/features/bloc_observer.dart';
+import 'package:catalyst_test/src/features/users/presentation/cubit/users_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'src/features/users/presentation/pages/users_screen.dart';
+import 'injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Set the Bloc observer
+  Bloc.observer = const SimpleBlocObserver();
+  // Initialize dependency injection
+
+  await di.init();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,12 +29,33 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Montserrat',
         scaffoldBackgroundColor: HexColor('#eeede7'),
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        colorScheme: const ColorScheme.light(),
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+          titleMedium: TextStyle(
+            fontSize: 16.0,
 
+            // fontWeight: FontWeight.bold,
+          ),
+          titleSmall: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        colorScheme: const ColorScheme.light(),
         useMaterial3: true,
       ),
-      home: const UsersScreen(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => sl<UsersCubit>()..getAllUsers(),
+          )
+        ],
+        child: const UsersScreen(),
+      ),
+      // home: const UsersScreen(),
     );
   }
 }

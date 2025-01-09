@@ -1,7 +1,5 @@
 abstract class Failure {}
 
-class FirebaseFailure implements Failure {}
+class ServerFailure implements Failure {}
 
 class OfflineFailure implements Failure {}
-
-class CacheFailure implements Failure {}

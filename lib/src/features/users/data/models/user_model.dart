@@ -17,15 +17,21 @@ class UserModel extends UserEntity {
   });
 
   // Factory constructor to create an instance from JSON
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
+    
     return UserModel(
       id: json['id'],
       name: json['name'],
       email: json['email'],
       phone: json['phone'],
       role: json['role'],
-      profileImage: json['profile_image'],
-      introVideo: json['intro_video'],
+      // profileImage: json['profile_image'] ?? src,
+      profileImage:
+          'https://bio3.catalyst.com.eg/public/Catalyst_portfolio/IMG_0997%20(1).jpg',
+
+      introVideo:
+          "https://bio3.catalyst.com.eg/public/Catalyst_portfolio/techtest.mp4",
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );
