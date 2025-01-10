@@ -17,11 +17,11 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
       Response response = await _dio.get(ApiEndPoints.users);
 
       List<dynamic> data = response.data;
-  
+
       final List<UserModel> users = data
           .map<UserModel>((userJson) {
             try {
-              return UserModel.fromJson(userJson); 
+              return UserModel.fromJson(userJson);
             } catch (e) {
               print('Error parsing user: $e');
               return UserModel(
@@ -34,7 +34,7 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
                 introVideo: 'introVideo',
                 createdAt: 'createdAt',
                 updatedAt: 'updatedAt,',
-              ); 
+              );
             }
           })
           .where((user) => user.id != -1)
@@ -50,8 +50,9 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
   @override
   Future<UserEntity> fetchUserDetails({required uID}) async {
     try {
-      Response response = await _dio.get('${ApiEndPoints.users}/' + uID);
+      Response response = await _dio.get(ApiEndPoints.users + uID);
       dynamic data = response.data;
+      print(data);
       UserModel model = UserModel.fromJson(response.data);
       return model;
     } catch (e) {

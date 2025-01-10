@@ -14,7 +14,7 @@ class UsersCubit extends Cubit<UsersState> {
       {required this.fetchUserDetailsUsecase, required this.fetchAllUsers})
       : super(UsersInitial());
 
-  static UsersCubit get(context) => BlocProvider.of(context);
+  static UsersCubit get(context) => BlocProvider.of<UsersCubit>(context);
 
   List<UserEntity> _users = List.empty();
   List<UserEntity> get users => _users;

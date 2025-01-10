@@ -28,11 +28,13 @@ class UserCard extends StatelessWidget {
               onTap: () {
                 UsersCubit.get(context)
                     .getUserDetails(uID: userEntity.id.toString());
-                navigateTo(context: context, screen: const UserDetailsScreen());
+                navigateTo(
+                    context: context,
+                    screen: UserDetailsScreen(
+                      uID: userEntity.id.toString(),
+                    ));
               },
               child: Card(
-                // color: Colors.red,
-
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

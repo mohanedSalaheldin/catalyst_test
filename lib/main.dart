@@ -23,39 +23,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Catalyst',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Montserrat',
-        scaffoldBackgroundColor: HexColor('#eeede7'),
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-          ),
-          titleMedium: TextStyle(
-            fontSize: 16.0,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<UsersCubit>()..getAllUsers(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Catalyst',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Montserrat',
+          scaffoldBackgroundColor: HexColor('#eeede7'),
+          textTheme: const TextTheme(
+            titleLarge: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
+            titleMedium: TextStyle(
+              fontSize: 16.0,
 
-            // fontWeight: FontWeight.bold,
+              // fontWeight: FontWeight.bold,
+            ),
+            titleSmall: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          titleSmall: TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.bold,
-          ),
+          colorScheme: const ColorScheme.light(),
+          useMaterial3: true,
         ),
-        colorScheme: const ColorScheme.light(),
-        useMaterial3: true,
+        home: const UsersScreen(),
+        // home: const UsersScreen(),
       ),
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => sl<UsersCubit>()..getAllUsers(),
-          )
-        ],
-        child: const UsersScreen(),
-      ),
-      // home: const UsersScreen(),
     );
   }
 }
