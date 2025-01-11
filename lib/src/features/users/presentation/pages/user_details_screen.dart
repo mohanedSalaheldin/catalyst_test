@@ -24,14 +24,47 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<UsersCubit, UsersState>(
-        builder: (context, state) {
-          var cubit = UsersCubit.get(context);
-          // return const Center();
-          return Center(
-            child: UserCard(userEntity: cubit.curUserDetails),
-          );
-        },
+      body: SafeArea(
+        child: BlocBuilder<UsersCubit, UsersState>(
+          builder: (context, state) {
+            var cubit = UsersCubit.get(context);
+            if (state is UsersFetchDetailsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 400.0,
+                    height: 50.0,
+                    child: Card(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.edit,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  UserCard(userEntity: cubit.curUserDetails),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

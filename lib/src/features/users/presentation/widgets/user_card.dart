@@ -3,7 +3,6 @@ import 'package:catalyst_test/src/features/users/domain/entities/user_entity.dar
 import 'package:catalyst_test/src/features/users/presentation/cubit/users_cubit.dart';
 import 'package:catalyst_test/src/features/users/presentation/cubit/users_state.dart';
 import 'package:catalyst_test/src/features/users/presentation/pages/user_details_screen.dart';
-import 'package:catalyst_test/src/features/users/presentation/pages/users_screen.dart';
 import 'package:catalyst_test/src/features/users/presentation/widgets/profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,10 +47,6 @@ class UserCard extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            userEntity.role,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
                         ],
                       ),
                       const SizedBox(width: 15.0),
@@ -64,18 +59,16 @@ class UserCard extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           const SizedBox(height: 10.0),
-                          // const Divider(
-                          //   color: Colors.red,
-                          //   indent: .90,
-                          //   height: 20.0,
-                          //   thickness: .5,
-                          //   endIndent: 90,
-                          // ),
+
                           Text(
                             userEntity.phone,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                           const SizedBox(height: 10.0),
+                          Text(
+                            userEntity.role,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                           // Text(
                           //   userEntity.phone,
                           //   style: Theme.of(context).textTheme.titleSmall,

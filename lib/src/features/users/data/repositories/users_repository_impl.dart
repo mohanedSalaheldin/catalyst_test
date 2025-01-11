@@ -39,4 +39,16 @@ class UsersRepositoryImpl implements UsersRepository {
       return Left(OfflineFailure());
     }
   }
+  
+  @override
+  Future<Either<Failure, String>> deleteUser({required String uID}) {
+    // TODO: implement deleteUser
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Either<Failure, UserEntity>> editUserDetails({required String uID}) {
+    // TODO: implement editUserDetails
+    throw UnimplementedError();
+  }
 }

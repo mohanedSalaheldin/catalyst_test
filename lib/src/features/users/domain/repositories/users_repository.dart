@@ -5,4 +5,6 @@ import 'package:dartz/dartz.dart';
 abstract class UsersRepository {
   Future<Either<Failure, List<UserEntity>>> fetchAllUsers();
   Future<Either<Failure, UserEntity>> fetchUserDetails({required String uID});
+  Future<Either<Failure, UserEntity>> editUserDetails({required String uID});
+  Future<Either<Failure, String>> deleteUser({required String uID});
 }

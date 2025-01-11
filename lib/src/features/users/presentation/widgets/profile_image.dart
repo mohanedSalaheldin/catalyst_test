@@ -15,12 +15,11 @@ class ProfileImage extends StatelessWidget {
     return Center(
       child: badges.Badge(
         badgeStyle: badges.BadgeStyle(
-          badgeColor: HexColor("#e51e54"), 
-          borderRadius: BorderRadius.circular(8), 
-          elevation: 4, 
+          badgeColor: HexColor("#e51e54"),
+          borderRadius: BorderRadius.circular(8),
+          elevation: 4,
         ),
-        position: badges.BadgePosition.bottomEnd(
-            bottom: -5, end: -5),
+        position: badges.BadgePosition.bottomEnd(bottom: -5, end: -5),
         badgeContent: const Icon(
           Icons.verified,
           color: Colors.white,
@@ -28,7 +27,10 @@ class ProfileImage extends StatelessWidget {
         child: CircleAvatar(
           radius: 50,
           backgroundColor: Colors.white,
-          backgroundImage: NetworkImage(src),
+          backgroundImage: NetworkImage(
+            src,
+          ),
+          // child: const Text('Hiiiii'),
         ),
       ),
     );

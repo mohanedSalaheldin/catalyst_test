@@ -6,6 +6,8 @@ import 'package:dio/dio.dart';
 abstract class UsersRemoteDatasource {
   Future<List<UserEntity>> fetchAllUsers();
   Future<UserEntity> fetchUserDetails({required uID});
+  Future<UserEntity> editUserDetails({required uID});
+  Future<String> deleteUserDetails({required uID});
 }
 
 class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
@@ -59,5 +61,23 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
       print(e.toString());
       throw ();
     }
+  }
+
+  @override
+  Future<String> deleteUserDetails({required uID}) async {
+    try {
+      Response response = await _dio.get(ApiEndPoints.users + uID);
+      Map<String, dynamic> data = response.data as Map<String, dynamic>;
+      return data['message'];
+    } catch (e) {
+      print(e.toString());
+      throw ();
+    }
+  }
+
+  @override
+  Future<UserEntity> editUserDetails({required uID}) {
+    // TODO: implement editUserDetails
+    throw UnimplementedError();
   }
 }
