@@ -31,9 +31,10 @@ class UsersScreen extends StatelessWidget {
                   : GridView.builder(
                       padding: const EdgeInsets.all(8.0),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: count,
-                          childAspectRatio: 1,
-                          mainAxisExtent: 220),
+                        crossAxisCount: count,
+                        childAspectRatio: 1,
+                        mainAxisExtent: 170,
+                      ),
                       itemCount: users.length,
                       itemBuilder: (context, index) {
                         return UserCard(

@@ -22,7 +22,7 @@ class UserCard extends StatelessWidget {
         return Center(
           child: SizedBox(
             width: 400.0,
-            height: 200.0,
+            height: 150.0,
             child: InkWell(
               onTap: () {
                 UsersCubit.get(context)
