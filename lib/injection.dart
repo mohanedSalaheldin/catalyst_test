@@ -16,7 +16,12 @@ Future<void> init() async {
 // Users
   // Bloc
   sl.registerFactory(
-    () => UsersCubit(fetchAllUsers: sl(), fetchUserDetailsUsecase: sl()),
+    () => UsersCubit(
+      fetchAllUsers: sl(),
+      fetchUserDetailsUsecase: sl(),
+      deleteUserUsecase: sl(),
+      editUserDetailsUsecase: sl(),
+    ),
   );
 
   // Repository

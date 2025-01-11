@@ -1,9 +1,6 @@
 import 'package:catalyst_test/src/features/users/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
-  final String createdAt;
-  final String updatedAt;
-
   UserModel({
     required super.id,
     required super.name,
@@ -12,14 +9,13 @@ class UserModel extends UserEntity {
     required super.role,
     required super.profileImage,
     required super.introVideo,
-    required this.createdAt,
-    required this.updatedAt,
+    required super.createdAt,
+    required super.updatedAt,
   });
 
   // Factory constructor to create an instance from JSON
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    
     return UserModel(
       id: json['id'],
       name: json['name'],

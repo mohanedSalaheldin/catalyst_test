@@ -30,8 +30,8 @@ class UsersRepositoryImpl implements UsersRepository {
       {required String uID}) async {
     if (await networkInfo.isConnected) {
       try {
-        UserEntity users = await datasource.fetchUserDetails(uID: uID);
-        return Right(users);
+        UserEntity user = await datasource.fetchUserDetails(uID: uID);
+        return Right(user);
       } catch (e) {
         return Left(ServerFailure());
       }
@@ -39,16 +39,33 @@ class UsersRepositoryImpl implements UsersRepository {
       return Left(OfflineFailure());
     }
   }
-  
+
   @override
-  Future<Either<Failure, String>> deleteUser({required String uID}) {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
+  Future<Either<Failure, String>> deleteUser({required String uID}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        String msg = await datasource.deleteUser(uID: uID);
+        return Right(msg);
+      } catch (e) {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
   }
-  
+
   @override
-  Future<Either<Failure, UserEntity>> editUserDetails({required String uID}) {
-    // TODO: implement editUserDetails
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> editUserDetails(
+      {required UserEntity user}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        await datasource.editUserDetails(user: user);
+        return const Right(unit);
+      } catch (e) {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
   }
 }

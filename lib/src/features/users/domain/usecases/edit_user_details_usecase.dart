@@ -7,7 +7,7 @@ class EditUserDetailsUsecase {
   final UsersRepository repository;
 
   EditUserDetailsUsecase({required this.repository});
-  Future<Either<Failure, UserEntity>> call({required uID}) {
-    return repository.editUserDetails(uID: uID);
+  Future<Either<Failure, Unit>> call({required UserEntity user}) {
+    return repository.editUserDetails(user: user);
   }
 }

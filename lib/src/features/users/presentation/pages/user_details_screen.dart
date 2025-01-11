@@ -1,5 +1,6 @@
 import 'package:catalyst_test/src/features/users/presentation/cubit/users_cubit.dart';
 import 'package:catalyst_test/src/features/users/presentation/cubit/users_state.dart';
+import 'package:catalyst_test/src/features/users/presentation/widgets/edit_user_dialoge.dart';
 import 'package:catalyst_test/src/features/users/presentation/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,8 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
         child: BlocBuilder<UsersCubit, UsersState>(
           builder: (context, state) {
             var cubit = UsersCubit.get(context);
-            if (state is UsersFetchDetailsLoading) {
+            if (state is UsersFetchDetailsLoading ||
+                state is UsersEditDetailsLoading) {
               return const Center(child: CircularProgressIndicator());
             }
             return Center(
@@ -43,14 +45,21 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              cubit.deleteUserByID(uID: widget.uID);
+
+                              Navigator.pop(context);
+                            },
                             icon: const Icon(
                               Icons.delete,
                               color: Colors.red,
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              editUserDialog(
+                                  context: context, user: cubit.curUserDetails);
+                            },
                             icon: const Icon(
                               Icons.edit,
                             ),

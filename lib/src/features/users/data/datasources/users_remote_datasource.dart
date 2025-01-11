@@ -1,13 +1,14 @@
 import 'package:catalyst_test/src/core/utils/consts/constatnts.dart';
 import 'package:catalyst_test/src/features/users/data/models/user_model.dart';
 import 'package:catalyst_test/src/features/users/domain/entities/user_entity.dart';
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 abstract class UsersRemoteDatasource {
   Future<List<UserEntity>> fetchAllUsers();
   Future<UserEntity> fetchUserDetails({required uID});
-  Future<UserEntity> editUserDetails({required uID});
-  Future<String> deleteUserDetails({required uID});
+  Future<Unit> editUserDetails({required UserEntity user});
+  Future<String> deleteUser({required uID});
 }
 
 class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
@@ -25,7 +26,7 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
             try {
               return UserModel.fromJson(userJson);
             } catch (e) {
-              print('Error parsing user: $e');
+              // print('Error parsing user: $e');
               return UserModel(
                 id: -1,
                 name: 'name',
@@ -64,9 +65,9 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
   }
 
   @override
-  Future<String> deleteUserDetails({required uID}) async {
+  Future<String> deleteUser({required uID}) async {
     try {
-      Response response = await _dio.get(ApiEndPoints.users + uID);
+      Response response = await _dio.delete(ApiEndPoints.users + uID);
       Map<String, dynamic> data = response.data as Map<String, dynamic>;
       return data['message'];
     } catch (e) {
@@ -76,8 +77,26 @@ class UsersRemoteDatasourceImpl implements UsersRemoteDatasource {
   }
 
   @override
-  Future<UserEntity> editUserDetails({required uID}) {
-    // TODO: implement editUserDetails
-    throw UnimplementedError();
+  Future<Unit> editUserDetails({required UserEntity user}) async {
+    try {
+      Response response = await _dio.post(
+        ApiEndPoints.users + user.id.toString(),
+        queryParameters: {
+          'id': user.id,
+          'name': user.name,
+          'email': user.email,
+          'phone': user.phone,
+          'createdAt': user.createdAt,
+          'updatedAt': DateTime.now().toString(),
+        },
+      );
+      dynamic data = response.data;
+      print(data);
+      return Future.value(unit);
+      // return model;
+    } catch (e) {
+      print(e.toString());
+      throw ();
+    }
   }
 }

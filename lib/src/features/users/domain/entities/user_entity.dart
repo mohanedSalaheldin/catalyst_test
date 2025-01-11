@@ -6,6 +6,8 @@ class UserEntity {
   final String role;
   final String profileImage;
   final String introVideo;
+  final String createdAt;
+  final String updatedAt;
 
   const UserEntity({
     required this.id,
@@ -15,5 +17,7 @@ class UserEntity {
     required this.role,
     required this.profileImage,
     required this.introVideo,
+    required this.createdAt,
+    required this.updatedAt,
   });
 }
