@@ -1,13 +1,11 @@
+import 'package:catalyst_test/home.dart';
 import 'package:catalyst_test/injection.dart';
 import 'package:catalyst_test/src/features/bloc_observer.dart';
 import 'package:catalyst_test/src/features/users/presentation/cubit/users_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-
-import 'src/features/users/presentation/pages/users_screen.dart';
 import 'injection.dart' as di;
-import 'src/features/users/presentation/widgets/video_player.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,9 +40,8 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
             titleMedium: TextStyle(
-              fontSize: 16.0,
-
-              // fontWeight: FontWeight.bold,
+              fontSize: 17.0,
+              fontWeight: FontWeight.w500,
             ),
             titleSmall: TextStyle(
               fontSize: 14.0,
@@ -54,8 +51,8 @@ class MyApp extends StatelessWidget {
           colorScheme: const ColorScheme.light(),
           useMaterial3: true,
         ),
-        home: const UsersScreen(),
-        // home: 
+        // home: const UsersScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

@@ -1,15 +1,14 @@
-import 'dart:io';
 
+import 'package:catalyst_test/responsive.dart';
 import 'package:catalyst_test/src/features/users/presentation/cubit/users_cubit.dart';
 import 'package:catalyst_test/src/features/users/presentation/cubit/users_state.dart';
 import 'package:catalyst_test/src/features/users/presentation/widgets/edit_user_dialoge.dart';
 import 'package:catalyst_test/src/features/users/presentation/widgets/profile_image.dart';
-import 'package:catalyst_test/src/features/users/presentation/widgets/user_card.dart';
 import 'package:catalyst_test/src/features/users/presentation/widgets/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:badges/badges.dart' as badges;
-import 'package:hexcolor/hexcolor.dart';
+// import 'package:badges/badges.dart' as badges;
+// import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 
 class UserDetailsScreen extends StatefulWidget {
@@ -32,7 +31,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Platform.isAndroid
+      appBar: ResponsiveWidget.isMobileLarge(context)
           ? AppBar(
               actions: [optionsButtons(context)],
             )
@@ -49,7 +48,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  if (!Platform.isAndroid)
+                  if (!ResponsiveWidget.isMobileLarge(context))
                     SizedBox(
                       width: 400.0,
                       height: 50.0,
@@ -181,10 +180,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   }
 
   String formatDate(String isoDate) {
-    // Parse the date string into a DateTime object
     DateTime dateTime = DateTime.parse(isoDate);
-
-    // Format the date
     return DateFormat('MMMM d, y, h:mm a').format(dateTime);
   }
 }
